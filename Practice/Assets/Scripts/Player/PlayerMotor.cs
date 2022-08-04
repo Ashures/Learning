@@ -11,7 +11,6 @@ public class PlayerMotor : MonoBehaviour
 
     private float moveDirection;
     private bool isMoving;
-    private int jumps;
 
     
     void Awake()
@@ -31,15 +30,11 @@ public class PlayerMotor : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.W) && jumps < 2)
+        if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(rb.velocity.y) < 0.001f)
         {
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            jumps += 1;
         }
-        if (Mathf.Abs(rb.velocity.y) < 0.001f)
-        {
-            jumps = 0;
-        }
+        
     }
 }
