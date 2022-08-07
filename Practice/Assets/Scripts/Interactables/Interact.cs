@@ -10,6 +10,9 @@ public class Interact : MonoBehaviour
     private bool inRange;
     private GameObject player;
 
+    public Vector2 offset;
+    public float dropDistance;
+
     private void Awake()
     {
         playerInput = new PlayerInput();
@@ -26,7 +29,7 @@ public class Interact : MonoBehaviour
         if (playerMovement.currentObject == this.gameObject)
         {
             transform.SetParent(null);
-            transform.Translate(new Vector2(2.5f, 0));
+            transform.Translate(new Vector2(dropDistance, 0));
             playerMovement.hasObject = false;
             playerMovement.currentObject = null;
             GetComponent<SpriteRenderer>().sortingOrder = 0;
@@ -36,7 +39,11 @@ public class Interact : MonoBehaviour
             playerMovement.currentObject = this.gameObject;
             transform.SetParent(player.transform);
             player.GetComponent<PlayerMovement>().hasObject = true;
+            
             GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+            transform.localPosition = Vector2.zero;
+            transform.Translate(offset);
         }
     }
 }
