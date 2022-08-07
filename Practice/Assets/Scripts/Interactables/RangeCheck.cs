@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RangeCheck : MonoBehaviour
 {
     public bool inRange = false;
-    public GameObject player;
+    private GameObject player;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

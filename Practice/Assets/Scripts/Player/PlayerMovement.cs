@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float sensitivity = 30f;
 
     public GameObject inRangeObject;
+
     public bool hasObject = false;
     public GameObject currentObject;
 
@@ -35,16 +36,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentObject != null)
         {
-            currentObject.GetComponent<Interact>().RunInteraction(this.gameObject, currentObject);
+            currentObject.GetComponent<Interact>().RunInteraction(this.gameObject);
         }
-        else
+        else if (inRangeObject != null && inRangeObject.GetComponent<Interact>() != null)
         {
-            if (inRangeObject != null) {
-                if (inRangeObject.GetComponent<Interact>() != null)
-                {
-                    inRangeObject.GetComponent<Interact>().RunInteraction(this.gameObject, null);
-                }
-            }
+            inRangeObject.GetComponent<Interact>().RunInteraction(this.gameObject);
         }
     }
 }
