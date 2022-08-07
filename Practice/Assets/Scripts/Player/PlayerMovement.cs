@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;
     public float sensitivity = 30f;
 
+    public GameObject inRangeObject;
+    public bool hasObject = false;
+    public GameObject currentObject;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,13 +23,28 @@ public class PlayerMovement : MonoBehaviour
         playerMove = Vector2.zero;
         playerMove += new Vector2(input.x * speed, input.y * speed);
         rb.velocity = playerMove;
-
-        Debug.Log(rb.velocity);
     }
 
     public void ProcessLook(Vector2 input)
     {
         playerRotation.z += input.x * sensitivity * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(playerRotation);
+    }
+
+    public void Interact()
+    {
+        if (currentObject != null)
+        {
+            currentObject.GetComponent<Interact>().RunInteraction(this.gameObject, currentObject);
+        }
+        else
+        {
+            if (inRangeObject != null) {
+                if (inRangeObject.GetComponent<Interact>() != null)
+                {
+                    inRangeObject.GetComponent<Interact>().RunInteraction(this.gameObject, null);
+                }
+            }
+        }
     }
 }
