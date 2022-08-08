@@ -23,12 +23,8 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void TakeDamage(float damage)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            float damage = collision.gameObject.GetComponent<Bullet>().damage;
-            health -= damage;
-        }
+        health -= damage;
     }
 }
