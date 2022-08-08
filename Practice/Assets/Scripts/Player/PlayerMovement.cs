@@ -9,10 +9,9 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;
     public float sensitivity = 30f;
 
-    public GameObject inRangeObject;
-
     public bool hasObject = false;
     public GameObject currentObject;
+    public GameObject inRangeObject;
 
     void Awake()
     {
@@ -30,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRotation.z += input.x * sensitivity * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(playerRotation);
+        if (currentObject != null)
+        {
+            currentObject.transform.rotation = Quaternion.Euler(playerRotation);
+        }
     }
 
     public void Interact()
