@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator animator;
 
     public float health;
 
@@ -12,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -26,5 +28,6 @@ public class EnemyBehaviour : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        animator.SetTrigger("hit");
     }
 }
